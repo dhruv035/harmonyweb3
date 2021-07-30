@@ -1,7 +1,6 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import Dashboard from "./Dashboard";
 import { Harmony } from "@harmony-js/core";
 import App2 from "./App2";
 import {

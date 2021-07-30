@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Button } from "@material-ui/core";
+import { Typography, Button, TextField } from "@material-ui/core";
 import harmonyLogo from "./assets/harmony.png";
 
 import UnlockModal from "./unlockModal";
@@ -72,14 +72,18 @@ const useStyles = makeStyles(theme => ({
 export default function Account() {
   const classes = useStyles();
   const [modalOpen, setModalOpen] = useState(false);
+  const [example, setExample] = useState(100);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setCount(count + 1);
+    console.log(`You clicked`, count);
+  }, [example]);
 
   const renderNotConnected = () => {
     return (
       <div className={classes.notConnectedRoot}>
         <div className={classes.connectHeading}>
-          <Typography variant="h2">
-            Token faucet demo dApp on Harmony
-          </Typography>
           <img alt="Harmony logo" src={harmonyLogo} />
         </div>
         <Button
@@ -89,11 +93,18 @@ export default function Account() {
         >
           <Typography>Connect your wallet</Typography>
         </Button>
+        <Typography>{example}</Typography>
+        <TextField onChange={handleChange}></TextField>
+        <Button></Button>
+
         {modalOpen && renderModal()}
       </div>
     );
   };
 
+  const handleChange = e => {
+    setExample(e.target.value);
+  };
   const connectClicked = () => {
     setModalOpen(true);
   };
